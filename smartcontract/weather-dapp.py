@@ -465,7 +465,7 @@ def Agreement(agreement_key, customer, insurer, location, timestamp, utc_offset,
     oracle_cost = 0
 
     
-    stuff = [customer, insurer, location, timestamp, utc_offset, amount, premium, fee, oracle, time_margin, min_time, max_time, status, weather_param, wind_speed , wave_height, wave_period, cloudCover, oracle_cost]
+    stuff = [customer, insurer, location, timestamp, utc_offset, amount, premium, fee, time_margin, min_time, max_time, status, weather_param, wind_speed , wave_height, wave_period, cloudCover, oracle_cost]
 
     agreement_data = Serialize(stuff)
 
@@ -519,20 +519,20 @@ def ResultNotice(agreement_key, weather_param, wind_speed , wave_height, wave_pe
 
     timestamp = agreement_data[3]
     utc_offset = agreement_data[4]
-    status = agreement_data[12]
+    status = agreement_data[11]
 
     if not status == 'initialized':
         Log("Contract has incorrect status to do a result notice")
         return False
 
     status = 'result-noticed'
-    agreement_data[12] = status
-    agreement_data[13] = weather_param
-    agreement_data[14] = wind_speed
-    agreement_data[15] = wave_height
-    agreement_data[16] = wave_period
-    agreement_data[17] = cloudCover
-    agreement_data[18] = oracle_cost
+    agreement_data[11] = status
+    agreement_data[12] = weather_param
+    agreement_data[13] = wind_speed
+    agreement_data[14] = wave_height
+    agreement_data[15] = wave_period
+    agreement_data[16] = cloudCover
+    agreement_data[17] = oracle_cost
 
     # Get timestamp of current block
     currentHeight = GetHeight()
@@ -569,17 +569,18 @@ def Claim(agreement_key):
     agreement_data = getDataByNumber(agreement_key)
     customer = agreement_data[0]
     insurer = agreement_data[1]
-    oracle = agreement_data[8]
-    status = agreement_data[12]
+    #oracle = agreement_data[8]
+    oracle = Get(context, 'oracle')
+    status = agreement_data[11]
     amount = agreement_data[5]
     premium = agreement_data[6]
     fee = agreement_data[7]
-    weather_param = agreement_data[13]
-    wind_speed = agreement_data[14]
-    wave_height = agreement_data[15]
-    wave_period = agreement_data[16]
-    cloudCover = agreement_data[17]
-    oracle_cost = agreement_data[18]
+    weather_param = agreement_data[12]
+    wind_speed = agreement_data[13]
+    wave_height = agreement_data[14]
+    wave_period = agreement_data[15]
+    cloudCover = agreement_data[16]
+    oracle_cost = agreement_data[17]
 
     # Check if the pay out is triggered by the owner, customer, or insurer.
     valid_witness = False
@@ -653,7 +654,7 @@ def Claim(agreement_key):
     DispatchTransferEvent(OWNER, oracle, oracle_cost)
 
     status = 'claimed'
-    agreement_data[12] = status
+    agreement_data[11] = status
     agreement_data = Serialize(agreement_data)
     Put(context, agreement_key, agreement_data)
     DispatchClaimEvent(agreement_key)
@@ -735,10 +736,9 @@ def RefundAll(agreement_key):
     
     context = GetContext()
     agreement_data = getDataByNumber(agreement_key)
-    status = agreement_data[12]
     customer = agreement_data[0]
     insurer = agreement_data[1]
-    status = agreement_data[12]
+    status = agreement_data[11]
     amount = agreement_data[5]
     premium = agreement_data[6]
     fee = agreement_data[7]
@@ -759,7 +759,7 @@ def RefundAll(agreement_key):
     DispatchTransferEvent(OWNER, customer, amount)
 
     status = 'refund'
-    agreement_data[12] = status
+    agreement_data[11] = status
     agreement_data = Serialize(agreement_data)
     Put(context, agreement_key, agreement_data)
     DispatchRefundAllEvent(agreement_key)
@@ -784,7 +784,7 @@ def DeleteAgreement(agreement_key):
     
     context = GetContext()
     agreement_data = getDataByNumber(agreement_key)
-    status = agreement_data[12]
+    status = agreement_data[11]
 
     if status == 'claimed':
         Delete(context, agreement_key)
