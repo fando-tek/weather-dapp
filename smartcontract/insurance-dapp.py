@@ -565,7 +565,7 @@ def Claim(agreement_key):
     :return: whether a pay out to the customer is done
     :rtype: bool
     """
-
+    context = GetContext()
     agreement_data = getDataByNumber(agreement_key)
     customer = agreement_data[0]
     insurer = agreement_data[1]
