@@ -1,5 +1,5 @@
-# Sunny dApp
-This repository contains a insurance smart contract that pays out based on a observed weather condition that can be signalled by an oracle. The decentralized application is build for the NEO blockchain using the Python tools (neo-boa and neo-pyton).
+# Weather dApp
+This repository contains insurance smart contracts which pay out based on observed weather conditions that can be signalled by an oracle. A decentralized application built for the NEO blockchain using Python tools (neo-boa and neo-pyton).
 
 ## Table of Contents
 
@@ -7,7 +7,6 @@ This repository contains a insurance smart contract that pays out based on a obs
 - [Installation](#installation)
 - [Usage](#usage)
 - [Maintainer](#maintainer)
-- [License](#license)
 
 ## Disclaimer
 This smart contract is for experimenal purposes and requires rigorous testing before deployment on the Main Net.
@@ -69,7 +68,7 @@ create wallet {/path}
 import wif {wif}
 
 # Import the contract (with storage enabled)
-import contract /smartcontract/sunny_dapp.avm 0710 05 True
+sc deploy insurance-dapp/smartcontract/insurance-dapp.avm True False False 0710 05 --fee=0.1
 
 # Fill in the metadata form and optionally deploy with your wallet password after a succesful test invoke
 
@@ -80,11 +79,4 @@ contract search <entered author name>
 
 ## Maintainers
 
-[@JorritvandenBerg](mailto:jorrit_van_den_berg@hotmail.com)
-
-## License
-
-[License](LICENSE)
-
-
-
+[@Fando]
