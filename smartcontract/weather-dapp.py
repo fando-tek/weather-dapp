@@ -414,7 +414,8 @@ def Agreement(agreement_key, customer, insurer, location, timestamp, utc_offset,
 
     # Check if the contract is deployed
     context = GetContext()
-    if not Get(context, 'dapp_name'):
+    dappName = Get(context, 'dapp_name')
+    if not dappName == dapp_name:
         Log("Must first deploy contract with the deploy operation")
         return False
 
@@ -426,8 +427,8 @@ def Agreement(agreement_key, customer, insurer, location, timestamp, utc_offset,
     # Compute timezone adjusted time
     timezone_timestamp = timestamp + (utc_offset * 3600)
     timezone_current_time = current_time + (utc_offset * 3600)
-    print (timezone_timestamp)
-    print (timezone_current_time)
+    #print (timezone_timestamp)
+    #print (timezone_current_time)
 
     # Get contract settings
     dapp_name = Get(context, 'dapp_name')
