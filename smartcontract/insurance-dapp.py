@@ -732,7 +732,8 @@ def RefundAll(agreement_key):
     if not CheckWitness(OWNER):
         Log("Must be owner to do a refund to all")
         return False
-
+    
+    context = GetContext()
     agreement_data = getDataByNumber(agreement_key)
     status = agreement_data[12]
     customer = agreement_data[0]
@@ -780,7 +781,8 @@ def DeleteAgreement(agreement_key):
     if not CheckWitness(OWNER):
         Log("Must be owner to delete an agreement")
         return False
-
+    
+    context = GetContext()
     agreement_data = getDataByNumber(agreement_key)
     status = agreement_data[12]
 
