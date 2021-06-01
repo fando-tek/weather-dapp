@@ -31,7 +31,7 @@ neo> sc deploy weather-dapp/smartcontract/weather-dapp.avm True False False 0710
 neo> show contract all
 
 Using:
-neo> sc invoke 0x787177654e549a1b8bf3f6dcacbfec3b006a5286 deploy ['weather',b'#\xba\'\x03\xc52\xe8\xd6\xe5"\xdc2 39\xdc\xd8\xee\xe9',1,5,864000,0.1] --fee=0.1
+neo> sc invoke 0x787177654e549a1b8bf3f6dcacbfec3b006a5286 deploy ['weather',b'#\xba\'\x03\xc52\xe8\xd6\xe5"\xdc2 39\xdc\xd8\xee\xe9',1,5,10,0.1] --fee=0.1
 neo> sc invoke 0x787177654e549a1b8bf3f6dcacbfec3b006a5286 agreement ['ID1',b'\x01\x1c\xaau\xb1\xba\xdc\xa9\xd9\xbf&\xb3\xc4\xbc\x99A\x8f\xc6w\x89',b'#\xba\'\x03\xc52c\xe8\xd6\xe5"\xdc2 39\xdc\xd8\xee\xe9','kupang',1622525500,0,1000,10000,'weather',1] --fee=0.1
 neo> sc invoke 0x787177654e549a1b8bf3f6dcacbfec3b006a5286 resultNotice ['ID1',49,51,4,4,79,1] --fee=0.1
 neo> sc invoke 0x787177654e549a1b8bf3f6dcacbfec3b006a5286 claim ['ID1']
