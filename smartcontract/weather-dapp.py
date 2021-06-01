@@ -816,7 +816,7 @@ def DeleteApproval(agreement_key):
         Delete(context, agreement_key)
         DispatchDeleteAgreementEvent(agreement_key)
 
-    return False
+    return True
 
 def getDataByNumber(agreement_key):
     context = GetContext()
