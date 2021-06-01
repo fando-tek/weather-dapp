@@ -18,11 +18,11 @@ customer and insurer with the 'refundAll' operation.
 deploy with an extra network fee as contract is > 1024 bytes (--fee=0.1, see "Importing")
 
 Testing:
-neo> sc build_run sunny-dapp/smartcontract/sunny_dapp.py True False False 0710 05 deploy ['weather',b'#\xba\'\x03\xc52\xe8\xd6\xe5"\xdc2 39\xdc\xd8\xee\xe9',1,5,864000,0.1] --fee=0.1
-neo> sc build_run sunny-dapp/smartcontract/sunny_dapp.py True False False 0710 05 agreement ['ID1',b'\x01\x1c\xaau\xb1\xba\xdc\xa9\xd9\xbf&\xb3\xc4\xbc\x99A\x8f\xc6w\x89',b'#\xba\'\x03\xc52c\xe8\xd6\xe5"\xdc2 39\xdc\xd8\xee\xe9','kupang',1622525500,0,1000,10000,'weather',1] --fee=0.1
-neo> sc build_run sunny-dapp/smartcontract/sunny_dapp.py True False False 0710 05 resultNotice ['ID1',49,51,4,4,79,1] --fee=0.1
+neo> sc build_run sunny-dapp/smartcontract/sunny_dapp.py True False False 0710 05 deploy ['weather',b'#\xba\'\x03\xc52\xe8\xd6\xe5"\xdc2 39\xdc\xd8\xee\xe9',1,5,864000,0.1]
+neo> sc build_run sunny-dapp/smartcontract/sunny_dapp.py True False False 0710 05 agreement ['ID1',b'\x01\x1c\xaau\xb1\xba\xdc\xa9\xd9\xbf&\xb3\xc4\xbc\x99A\x8f\xc6w\x89',b'#\xba\'\x03\xc52c\xe8\xd6\xe5"\xdc2 39\xdc\xd8\xee\xe9','kupang',1622525500,0,1000,10000,'weather',1]
+neo> sc build_run sunny-dapp/smartcontract/sunny_dapp.py True False False 0710 05 resultNotice ['ID1',49,51,4,4,79,1]
 neo> sc build_run sunny-dapp/smartcontract/sunny_dapp.py True False False 0710 05 claim ['ID1']
-neo> sc build_run sunny-dapp/smartcontract/sunny_dapp.py True False False 0710 05 transfer [b'#\xba\'\x03\xc52c\xe8\xd6\xe5"\xdc2 39\xdc\xd8\xee\xe9',b'#\xba\'\x03\xc52\xe8\xd6\xe5"\xdc2 39\xdc\xd8\xee\xe9',100] --fee=0.1
+neo> sc build_run sunny-dapp/smartcontract/sunny_dapp.py True False False 0710 05 transfer [b'#\xba\'\x03\xc52c\xe8\xd6\xe5"\xdc2 39\xdc\xd8\xee\xe9',b'#\xba\'\x03\xc52\xe8\xd6\xe5"\xdc2 39\xdc\xd8\xee\xe9',100]
 neo> sc build_run sunny-dapp/smartcontract/sunny_dapp.py True False False 0710 05 refundAll ['ID1'] 
 neo> sc build_run sunny-dapp/smartcontract/sunny_dapp.py True False False 0710 05 deleteAgreement ['ID1']
 
@@ -65,7 +65,7 @@ wave_height_result = 3
 wave_period_result = 5
 cloudCover_result = 80
 
-# Threshold of relative sunshine duration percent on a given day
+# Threshold of weather parameters during storms on a given day
 
 # -------------------------------------------
 # Events
