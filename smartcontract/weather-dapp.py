@@ -12,32 +12,32 @@ insurer or owner can claim to pay out the insured amount/premium.
 The oracle will also be paid for its services/costs.
 
 In case the oracle fails to signal the result, the owner can refund both the
-customer and insurer with the 'refundAll' operation.
+customer and insurer with the 'refund' operation.
 
 !NOTE! Current versions of neo-python/neo-boa does not calculate fees correctly,
 deploy with an extra network fee as contract is > 1024 bytes (--fee=0.1, see "Importing")
 
 Testing:
-neo> sc build_run sunny-dapp/smartcontract/sunny_dapp.py True False False 0710 05 deploy ['weather',b'#\xba\'\x03\xc52\xe8\xd6\xe5"\xdc2 39\xdc\xd8\xee\xe9',1,5,10,0.1]
-neo> sc build_run sunny-dapp/smartcontract/sunny_dapp.py True False False 0710 05 agreement ['ID1',b'\x01\x1c\xaau\xb1\xba\xdc\xa9\xd9\xbf&\xb3\xc4\xbc\x99A\x8f\xc6w\x89',b'#\xba\'\x03\xc52c\xe8\xd6\xe5"\xdc2 39\xdc\xd8\xee\xe9','kupang',1622525500,0,1000,10000,'weather',1]
+neo> sc build_run sunny-dapp/smartcontract/sunny_dapp.py True False False 0710 05 implement ['weather',b'#\xba\'\x03\xc52\xe8\xd6\xe5"\xdc2 39\xdc\xd8\xee\xe9',1,5,10,0.1]
+neo> sc build_run sunny-dapp/smartcontract/sunny_dapp.py True False False 0710 05 approval ['ID1',b'\x01\x1c\xaau\xb1\xba\xdc\xa9\xd9\xbf&\xb3\xc4\xbc\x99A\x8f\xc6w\x89',b'#\xba\'\x03\xc52c\xe8\xd6\xe5"\xdc2 39\xdc\xd8\xee\xe9','kupang',1622525500,0,1000,10000,'weather',1]
 neo> sc build_run sunny-dapp/smartcontract/sunny_dapp.py True False False 0710 05 resultNotice ['ID1',49,51,4,4,79,1]
-neo> sc build_run sunny-dapp/smartcontract/sunny_dapp.py True False False 0710 05 claim ['ID1']
+neo> sc build_run sunny-dapp/smartcontract/sunny_dapp.py True False False 0710 05 pay-out ['ID1']
 neo> sc build_run sunny-dapp/smartcontract/sunny_dapp.py True False False 0710 05 transfer [b'#\xba\'\x03\xc52c\xe8\xd6\xe5"\xdc2 39\xdc\xd8\xee\xe9',b'#\xba\'\x03\xc52\xe8\xd6\xe5"\xdc2 39\xdc\xd8\xee\xe9',100]
-neo> sc build_run sunny-dapp/smartcontract/sunny_dapp.py True False False 0710 05 refundAll ['ID1'] 
-neo> sc build_run sunny-dapp/smartcontract/sunny_dapp.py True False False 0710 05 deleteAgreement ['ID1']
+neo> sc build_run sunny-dapp/smartcontract/sunny_dapp.py True False False 0710 05 refund ['ID1'] 
+neo> sc build_run sunny-dapp/smartcontract/sunny_dapp.py True False False 0710 05 deleteApproval ['ID1']
 
 Importing:
 neo> sc deploy weather-dapp/smartcontract/weather-dapp.avm True False False 0710 05 --fee=0.1
 neo> show contract all
 
 Using:
-neo> sc invoke 0x787177654e549a1b8bf3f6dcacbfec3b006a5286 deploy ['weather',b'#\xba\'\x03\xc52\xe8\xd6\xe5"\xdc2 39\xdc\xd8\xee\xe9',1,5,10,0.1] --fee=0.1
-neo> sc invoke 0x787177654e549a1b8bf3f6dcacbfec3b006a5286 agreement ['ID1',b'\x01\x1c\xaau\xb1\xba\xdc\xa9\xd9\xbf&\xb3\xc4\xbc\x99A\x8f\xc6w\x89',b'#\xba\'\x03\xc52c\xe8\xd6\xe5"\xdc2 39\xdc\xd8\xee\xe9','kupang',1622525500,0,1000,10000,'weather',1] --fee=0.1
+neo> sc invoke 0x787177654e549a1b8bf3f6dcacbfec3b006a5286 implement ['weather',b'#\xba\'\x03\xc52\xe8\xd6\xe5"\xdc2 39\xdc\xd8\xee\xe9',1,5,10,0.1] --fee=0.1
+neo> sc invoke 0x787177654e549a1b8bf3f6dcacbfec3b006a5286 approval ['ID1',b'\x01\x1c\xaau\xb1\xba\xdc\xa9\xd9\xbf&\xb3\xc4\xbc\x99A\x8f\xc6w\x89',b'#\xba\'\x03\xc52c\xe8\xd6\xe5"\xdc2 39\xdc\xd8\xee\xe9','kupang',1622525500,0,1000,10000,'weather',1] --fee=0.1
 neo> sc invoke 0x787177654e549a1b8bf3f6dcacbfec3b006a5286 resultNotice ['ID1',49,51,4,4,79,1] --fee=0.1
-neo> sc invoke 0x787177654e549a1b8bf3f6dcacbfec3b006a5286 claim ['ID1']
+neo> sc invoke 0x787177654e549a1b8bf3f6dcacbfec3b006a5286 pay-out ['ID1']
 neo> sc invoke 0x787177654e549a1b8bf3f6dcacbfec3b006a5286 transfer [b'#\xba\'\x03\xc52c\xe8\xd6\xe5"\xdc2 39\xdc\xd8\xee\xe9',b'#\xba\'\x03\xc52\xe8\xd6\xe5"\xdc2 39\xdc\xd8\xee\xe9',100] --fee=0.1
-neo> sc invoke 0x787177654e549a1b8bf3f6dcacbfec3b006a5286 refundAll ['ID1'] 
-neo> sc invoke 0x787177654e549a1b8bf3f6dcacbfec3b006a5286 deleteAgreement ['ID1'] 
+neo> sc invoke 0x787177654e549a1b8bf3f6dcacbfec3b006a5286 refund ['ID1'] 
+neo> sc invoke 0x787177654e549a1b8bf3f6dcacbfec3b006a5286 deleteApproval ['ID1'] 
 """
 
 from boa.interop.Neo.Runtime import CheckWitness, Deserialize, GetTime, GetTrigger, Serialize
@@ -70,7 +70,7 @@ cloudCover_result = 80
 # Events
 # -------------------------------------------
 
-DispatchAgreementEvent = RegisterAction('agreement', 'agreement_key')
+DispatchAgreementEvent = RegisterAction('approval', 'agreement_key')
 DispatchResultNoticeEvent = RegisterAction('result-notice', 'agreement_key', 'weather_param', 'wind_speed', 'wave_height', 'wave_period', 'cloudCover', 'oracle_cost')
 DispatchClaimEvent = RegisterAction('pay-out', 'agreement_key')
 DispatchTransferEvent = RegisterAction('transfer', 'from', 'to', 'amount')
@@ -105,7 +105,7 @@ def Main(operation, args):
 
     elif trigger == Application():
 
-        if operation == 'deploy':
+        if operation == 'implement':
             if len(args) == 6:
                 dapp_name = args[0]
                 oracle = args[1]
@@ -113,7 +113,7 @@ def Main(operation, args):
                 min_time = args[3]
                 max_time = args[4]
                 fee = args[5]
-                d = Deploy(dapp_name, oracle, time_margin, min_time, max_time)
+                d = Implement(dapp_name, oracle, time_margin, min_time, max_time)
 
                 Log("Dapp deployed")
                 return d
@@ -180,7 +180,7 @@ def Main(operation, args):
             else:
                 return False
 
-        elif operation == 'agreement':
+        elif operation == 'approval':
             if len(args) == 10:
                 agreement_key = args[0]
                 customer = args[1]
@@ -192,7 +192,7 @@ def Main(operation, args):
                 premium = args[7]
                 dapp_name = args[8]
                 fee = args[9]
-                a = Agreement(agreement_key, customer, insurer, location, timestamp, utc_offset, amount, premium, dapp_name, fee)
+                a = Approval(agreement_key, customer, insurer, location, timestamp, utc_offset, amount, premium, dapp_name, fee)
 
                 Log("Agreement added!")
                 return a
@@ -214,10 +214,10 @@ def Main(operation, args):
             else:
                 return False
 
-        elif operation == 'claim':
+        elif operation == 'pay-out':
             if len(args) == 1:
                 agreement_key = args[0]
-                return Claim(agreement_key)
+                return PayOut(agreement_key)
 
             else:
                 return False
@@ -232,18 +232,18 @@ def Main(operation, args):
             else:
                 return False
 
-        elif operation == 'refundAll':
+        elif operation == 'refund':
             if len(args) == 1:
                 agreement_key = args[0]
-                return RefundAll(agreement_key)
+                return Refund(agreement_key)
 
             else:
                 return False
 
-        elif operation == 'deleteAgreement':
+        elif operation == 'deleteApproval':
             if len(args) == 1:
                 agreement_key = args[0]
-                return DeleteAgreement(agreement_key)
+                return DeleteApproval(agreement_key)
 
             else:
                 return False
@@ -255,7 +255,7 @@ def Main(operation, args):
     return False
 
 
-def Deploy(dapp_name, oracle, time_margin, min_time, max_time):
+def Implement(dapp_name, oracle, time_margin, min_time, max_time):
     """
     Method for the dApp owner initiate settings in storage
 
@@ -394,7 +394,7 @@ def UpdateTimeLimits(time_variable, value):
     return True
 
 
-def Agreement(agreement_key, customer, insurer, location, timestamp, utc_offset, amount, premium, dapp_name, fee):
+def Approval(agreement_key, customer, insurer, location, timestamp, utc_offset, amount, premium, dapp_name, fee):
 
     """
     Method to create an agreement
@@ -583,7 +583,7 @@ def ResultNotice(agreement_key, weather_param, wind_speed , wave_height, wave_pe
         return True
 
 
-def Claim(agreement_key):
+def PayOut(agreement_key):
     """
     Method to handle the pay out
 
@@ -732,7 +732,7 @@ def DoTransfer(sender, receiver, amount):
     return True
 
 
-def RefundAll(agreement_key):
+def Refund(agreement_key):
     """
     Method refund payments in case a total eclipse or EMP caused oracle failure
 
@@ -785,7 +785,7 @@ def RefundAll(agreement_key):
     return True
 
 
-def DeleteAgreement(agreement_key):
+def DeleteApproval(agreement_key):
     """
     Method for the dApp owner to delete claimed or refunded agreements
 
