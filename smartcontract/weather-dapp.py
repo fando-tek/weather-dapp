@@ -71,7 +71,7 @@ cloudCover_result = 80
 # -------------------------------------------
 
 DispatchAgreementEvent = RegisterAction('approval', 'agreement_key')
-DispatchResultNoticeEvent = RegisterAction('result-notice', 'agreement_key', 'weather_param', 'wind_speed', 'wave_height', 'wave_period', 'cloudCover', 'oracle_cost')
+DispatchResultNoticeEvent = RegisterAction('result-oracle', 'agreement_key', 'weather_param', 'wind_speed', 'wave_height', 'wave_period', 'cloudCover', 'oracle_cost')
 DispatchClaimEvent = RegisterAction('pay-out', 'agreement_key')
 DispatchTransferEvent = RegisterAction('transfer', 'from', 'to', 'amount')
 DispatchRefundAllEvent = RegisterAction('refund-all', 'agreement_key')
@@ -200,7 +200,7 @@ def Main(operation, args):
             else:
                 return False
 
-        elif operation == 'resultNotice':
+        elif operation == 'resultOracle':
             if len(args) == 7:
                 agreement_key = args[0]
                 weather_param = args[1]
@@ -209,7 +209,7 @@ def Main(operation, args):
                 wave_period = args[4]
                 cloudCover = args[5]
                 oracle_cost = args[6]
-                return ResultNotice(agreement_key, weather_param, wind_speed, wave_height, wave_period, cloudCover, oracle_cost)
+                return ResultOracle(agreement_key, weather_param, wind_speed, wave_height, wave_period, cloudCover, oracle_cost)
 
             else:
                 return False
@@ -502,7 +502,7 @@ def Approval(agreement_key, customer, insurer, location, timestamp, utc_offset, 
     return True
 
 
-def ResultNotice(agreement_key, weather_param, wind_speed , wave_height, wave_period, cloudCover, oracle_cost):
+def ResultOracle(agreement_key, weather_param, wind_speed , wave_height, wave_period, cloudCover, oracle_cost):
     """
     Method to signal resulte by oracle
 
