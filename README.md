@@ -61,8 +61,8 @@ Array = 10
 InteropInterface = f0
 Void = ff
 
-##!NOTE! Current versions of neo-python/neo-boa does not calculate fees correctly,
-##deploy with an extra network fee as contract is > 1024 bytes (--fee=0.1, see "Importing")
+## !NOTE! Current versions of neo-python/neo-boa does not calculate fees correctly,
+## deploy with an extra network fee as contract is > 1024 bytes (--fee=0.1, see "Importing")
 
 ### Function Smartcontract
 deploy [dapp_name, oracle, time_margin, min_time, max_time]
