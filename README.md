@@ -10,7 +10,7 @@ apt upgrade
 
 git clone https://github.com/Fando-TE/weather-dapp.git
 
-# Merubah Kodingan Smartcontract
+## Merubah Kodingan Smartcontract
 
 cd weather-dapp/smartcontract/
 nano weather-dapp.py
