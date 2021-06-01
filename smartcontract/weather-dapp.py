@@ -268,17 +268,18 @@ def Deploy(dapp_name, oracle, time_margin, min_time, max_time):
 
     Put(context, 'time_margin', time_margin)
 
-    #if min_time < 3600 + time_margin:
-    #   Log("min_time must be greater than 3600 + time_margin")
-    #   return False
+    if min_time < 4 + time_margin:
+        Log("min_time must be greater than 3600 + time_margin")
+        return False
 
     Put(context, 'min_time', min_time)
     
-    max_time = max_time * 3600 * 24
+    maxtime = max_time * 3600 * 24
     if max_time <= (min_time + time_margin):
         Log("max_time must be greather than min_time + time_margin")
         return False
-
+    
+    max_time = maxtime 
     Put(context, 'max_time', max_time)
 
     return True
@@ -428,7 +429,7 @@ def Agreement(agreement_key, customer, insurer, location, timestamp, utc_offset,
     timezone_timestamp = timestamp + (utc_offset * 3600)
     timezone_current_time = current_time + (utc_offset * 3600)
     print (timezone_timestamp)
-    #print (timezone_current_time)
+    print (timezone_current_time)
 
     # Get contract settings
     dapp_name = Get(context, 'dapp_name')
@@ -509,8 +510,10 @@ def ResultNotice(agreement_key, weather_param, wind_speed , wave_height, wave_pe
     # Check if the method is triggered by the oracle for this agreement
     context = GetContext()
     agreement_data = getDataByNumber(agreement_key)
-    #oracle = agreement_data[8]
-
+    if agreement_data == '':
+        Log("Agreement_key is deleted")
+        return False
+    
     oracle = Get(context, 'oracle')
     print (oracle)
 
@@ -568,10 +571,12 @@ def Claim(agreement_key):
     """
     context = GetContext()
     agreement_data = getDataByNumber(agreement_key)
+    if agreement_data == '':
+        Log("Agreement_key is deleted")
+        return False
+    
     customer = agreement_data[0]
     insurer = agreement_data[1]
-    #oracle = agreement_data[8]
-    oracle = Get(context, 'oracle')
     status = agreement_data[11]
     amount = agreement_data[5]
     premium = agreement_data[6]
@@ -582,6 +587,8 @@ def Claim(agreement_key):
     wave_period = agreement_data[15]
     cloudCover = agreement_data[16]
     oracle_cost = agreement_data[17]
+    
+    oracle = Get(context, 'oracle')
 
     # Check if the pay out is triggered by the owner, customer, or insurer.
     valid_witness = False
@@ -614,34 +621,16 @@ def Claim(agreement_key):
 
     net_premium = premium - fee
 
-    if weather_param >= weather_param_result:
+    if weather_param >= weather_param_result or wind_speed <= wind_speed_result or wave_height <= wave_height_result or wave_period >= wav$
         Notify("Day was sunny, no pay out to customer")
         DoTransfer(OWNER, insurer, net_premium)
         DispatchTransferEvent(OWNER, insurer, net_premium)
-        return False
-
-    if wind_speed <= wind_speed_result:
-        Notify("No pay out to customer")
-        DoTransfer(OWNER, insurer, net_premium)
-        DispatchTransferEvent(OWNER, insurer, net_premium)
-        return False
-
-    if wave_height <= wave_height_result:
-        Notify("No pay out to customer")
-        DoTransfer(OWNER, insurer, net_premium)
-        DispatchTransferEvent(OWNER, insurer, net_premium)
-        return False
-
-    if wave_period >= wave_period_result :
-        Notify("No pay out to customer")
-        DoTransfer(OWNER, insurer, net_premium)
-        DispatchTransferEvent(OWNER, insurer, net_premium)
-        return False
-
-    if cloudCover <= cloudCover_result :
-        Notify("No pay out to customer")
-        DoTransfer(OWNER, insurer, net_premium)
-        DispatchTransferEvent(OWNER, insurer, net_premium)
+        agreement_data = getDataByNumber(agreement_key)
+        status = 'initialized'
+        agreement_data[11] = status
+        print (status)
+        agreement_data = Serialize(agreement_data)
+        Put(context, agreement_key, agreement_data)
         return False
 
     else:
@@ -737,6 +726,10 @@ def RefundAll(agreement_key):
     
     context = GetContext()
     agreement_data = getDataByNumber(agreement_key)
+    if agreement_data == '':
+        Log("Agreement_key is deleted")
+        return False
+    
     customer = agreement_data[0]
     insurer = agreement_data[1]
     status = agreement_data[11]
@@ -759,7 +752,7 @@ def RefundAll(agreement_key):
     DoTransfer(OWNER, customer, amount)
     DispatchTransferEvent(OWNER, customer, amount)
 
-    status = 'refund'
+    status = 'refunded'
     agreement_data[11] = status
     agreement_data = Serialize(agreement_data)
     Put(context, agreement_key, agreement_data)
@@ -785,6 +778,10 @@ def DeleteAgreement(agreement_key):
     
     context = GetContext()
     agreement_data = getDataByNumber(agreement_key)
+    if agreement_data == '':
+        Log("Agreement_key is deleted")
+        return False
+    
     status = agreement_data[11]
 
     if status == 'claimed':
