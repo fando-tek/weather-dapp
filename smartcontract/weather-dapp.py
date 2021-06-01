@@ -542,9 +542,9 @@ def ResultNotice(agreement_key, weather_param, wind_speed , wave_height, wave_pe
     oracle = Get(context, 'oracle')
     print (oracle)
 
-    if not CheckWitness(oracle):
-        Log("Must be oracle to notice results")
-        return False
+    #if not CheckWitness(oracle):
+        #Log("Must be oracle to notice results")
+        #return False
 
     timestamp = agreement_data[3]
     utc_offset = agreement_data[4]
