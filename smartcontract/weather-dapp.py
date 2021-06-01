@@ -427,7 +427,7 @@ def Agreement(agreement_key, customer, insurer, location, timestamp, utc_offset,
     # Compute timezone adjusted time
     timezone_timestamp = timestamp + (utc_offset * 3600)
     timezone_current_time = current_time + (utc_offset * 3600)
-    #print (timezone_timestamp)
+    print (timezone_timestamp)
     #print (timezone_current_time)
 
     # Get contract settings
