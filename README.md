@@ -16,7 +16,7 @@ cd weather-dapp/smartcontract/
 nano weather-dapp.py
 cd /neo-python/
 
-# Jalankan Neo-CLI
+### Jalankan Neo-CLI
 np-prompt -v -p
 
 # Mengaktifkan Log
