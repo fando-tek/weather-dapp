@@ -56,7 +56,6 @@ from boa.interop.Neo.Block import *
 # -------------------------------------------
 
 OWNER = b'#\xba\'\x03\xc52c\xe8\xd6\xe5"\xdc2 39\xdc\xd8\xee\xe9' 
-# b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
 # Script hash of the token owner
 
 weather_param_result = 50
