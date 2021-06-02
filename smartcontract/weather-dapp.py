@@ -18,13 +18,13 @@ customer and insurer with the 'refund' operation.
 deploy with an extra network fee as contract is > 1024 bytes (--fee=0.1, see "Importing")
 
 Testing:
-neo> sc build_run sunny-dapp/smartcontract/sunny_dapp.py True False False 0710 05 implement ['weather',b'#\xba\'\x03\xc52\xe8\xd6\xe5"\xdc2 39\xdc\xd8\xee\xe9',1,5,10,0.1]
-neo> sc build_run sunny-dapp/smartcontract/sunny_dapp.py True False False 0710 05 approval ['ID1',b'\x01\x1c\xaau\xb1\xba\xdc\xa9\xd9\xbf&\xb3\xc4\xbc\x99A\x8f\xc6w\x89',b'#\xba\'\x03\xc52c\xe8\xd6\xe5"\xdc2 39\xdc\xd8\xee\xe9','kupang',1622525500,0,1000,10000,'weather',1]
-neo> sc build_run sunny-dapp/smartcontract/sunny_dapp.py True False False 0710 05 resultOracle ['ID1',49,51,4,4,79,1]
-neo> sc build_run sunny-dapp/smartcontract/sunny_dapp.py True False False 0710 05 pay-out ['ID1']
-neo> sc build_run sunny-dapp/smartcontract/sunny_dapp.py True False False 0710 05 transfer [b'#\xba\'\x03\xc52c\xe8\xd6\xe5"\xdc2 39\xdc\xd8\xee\xe9',b'#\xba\'\x03\xc52\xe8\xd6\xe5"\xdc2 39\xdc\xd8\xee\xe9',100]
-neo> sc build_run sunny-dapp/smartcontract/sunny_dapp.py True False False 0710 05 refund ['ID1'] 
-neo> sc build_run sunny-dapp/smartcontract/sunny_dapp.py True False False 0710 05 deleteApproval ['ID1']
+neo> sc build_run weather-dapp/smartcontract/weather-dapp.py True False False 0710 05 implement ['weather',b'#\xba\'\x03\xc52\xe8\xd6\xe5"\xdc2 39\xdc\xd8\xee\xe9',1,5,10,0.1]
+neo> sc build_run weather-dapp/smartcontract/weather-dapp.py True False False 0710 05 approval ['ID1',b'\x01\x1c\xaau\xb1\xba\xdc\xa9\xd9\xbf&\xb3\xc4\xbc\x99A\x8f\xc6w\x89',b'#\xba\'\x03\xc52c\xe8\xd6\xe5"\xdc2 39\xdc\xd8\xee\xe9','kupang',1622525500,0,1000,10000,'weather',1]
+neo> sc build_run weather-dapp/smartcontract/weather-dapp.py True False False 0710 05 resultOracle ['ID1',49,51,4,4,79,1]
+neo> sc build_run weather-dapp/smartcontract/weather-dapp.py True False False 0710 05 pay-out ['ID1']
+neo> sc build_run weather-dapp/smartcontract/weather-dapp.py True False False 0710 05 transfer [b'#\xba\'\x03\xc52c\xe8\xd6\xe5"\xdc2 39\xdc\xd8\xee\xe9',b'#\xba\'\x03\xc52\xe8\xd6\xe5"\xdc2 39\xdc\xd8\xee\xe9',100]
+neo> sc build_run weather-dapp/smartcontract/weather-dapp.py True False False 0710 05 refund ['ID1'] 
+neo> sc build_run weather-dapp/smartcontract/weather-dapp.py True False False 0710 05 deleteApproval ['ID1']
 
 Importing:
 neo> sc deploy weather-dapp/smartcontract/weather-dapp.avm True False False 0710 05 --fee=0.1
