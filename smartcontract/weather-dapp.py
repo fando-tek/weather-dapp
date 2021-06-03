@@ -646,7 +646,7 @@ def PayOut(agreement_key):
     net_premium = premium - fee
 
     if weather_param >= weather_param_result or wind_speed <= wind_speed_result or wave_height <= wave_height_result or wave_period >= wave_period_result or cloudCover <= cloudCover_result:
-        Notify("Day was sunny, no pay out to customer")
+        Notify("No pay out to customer")
         DoTransfer(OWNER, insurer, net_premium)
         DispatchTransferEvent(OWNER, insurer, net_premium)
         agreement_data = getDataByNumber(agreement_key)
