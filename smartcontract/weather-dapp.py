@@ -181,18 +181,19 @@ def Main(operation, args):
                 return False
 
         elif operation == 'approval':
-            if len(args) == 10:
+            if len(args) == 11:
                 agreement_key = args[0]
                 customer = args[1]
                 insurer = args[2]
                 location = args[3]
                 timestamp = args[4]
                 utc_offset = args[5]
-                amount = args[6]
-                premium = args[7]
-                dapp_name = args[8]
-                fee = args[9]
-                a = Approval(agreement_key, customer, insurer, location, timestamp, utc_offset, amount, premium, dapp_name, fee)
+                condition = args [6]
+                amount = args[7]
+                premium = args[8]
+                dapp_name = args[9]
+                fee = args[10]
+                a = Approval(agreement_key, customer, insurer, location, timestamp, utc_offset, condition, amount, premium, dapp_name, fee)
 
                 Log("Agreement added!")
                 return a
@@ -394,7 +395,7 @@ def UpdateTimeLimits(time_variable, value):
     return True
 
 
-def Approval(agreement_key, customer, insurer, location, timestamp, utc_offset, amount, premium, dapp_name, fee):
+def Approval(agreement_key, customer, insurer, location, timestamp, utc_offset, condition, amount, premium, dapp_name, fee):
 
     """
     Method to create an agreement
@@ -470,6 +471,13 @@ def Approval(agreement_key, customer, insurer, location, timestamp, utc_offset, 
     elif timezone_timestamp > (timezone_current_time + max_time + time_margin):
         Log("Datetime must be < 30 days ahead")
         return False
+    
+    if condition == 'death':
+        amount = amount * 1
+    elif condition == 'permanent_disability':
+        amount = amount * 0.5
+    else:
+        amount = amount *0.1
 
     # Check if amount and premium are not zero or below
     if amount <= 0:
