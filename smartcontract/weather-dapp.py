@@ -64,6 +64,7 @@ wave_height_result = 3
 wave_period_result = 5
 cloudCover_result = 80
 
+
 # Threshold of weather parameters during storms on a given day
 
 # -------------------------------------------
@@ -394,7 +395,7 @@ def UpdateTimeLimits(time_variable, value):
     return True
 
 
-def Approval(agreement_key, customer, insurer, location, timestamp, utc_offset, amount, premium, dapp_name, fee):
+def Approval(agreement_key, customer, insurer, location, timestamp, utc_offset, condition, amount, premium, dapp_name, fee):
 
     """
     Method to create an agreement
@@ -470,6 +471,13 @@ def Approval(agreement_key, customer, insurer, location, timestamp, utc_offset, 
     elif timezone_timestamp > (timezone_current_time + max_time + time_margin):
         Log("Datetime must be < 30 days ahead")
         return False
+
+    if condition  == 'death':
+        amount = amount * 1
+    elif condition == 'permanent_disability':
+        amount = amount * 0.5
+    else:
+        amount = amount * 0.1
 
     # Check if amount and premium are not zero or below
     if amount <= 0:
