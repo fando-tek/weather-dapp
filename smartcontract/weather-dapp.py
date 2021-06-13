@@ -24,7 +24,7 @@ neo> sc build_run weather-dapp/smartcontract/weather-dapp.py True False False 07
 neo> sc build_run weather-dapp/smartcontract/weather-dapp.py True False False 0710 05 pay-out ['ID1']
 neo> sc build_run weather-dapp/smartcontract/weather-dapp.py True False False 0710 05 transfer [b'#\xba\'\x03\xc52c\xe8\xd6\xe5"\xdc2 39\xdc\xd8\xee\xe9',b'#\xba\'\x03\xc52\xe8\xd6\xe5"\xdc2 39\xdc\xd8\xee\xe9',100]
 neo> sc build_run weather-dapp/smartcontract/weather-dapp.py True False False 0710 05 refund ['ID1'] 
-neo> sc build_run weather-dapp/smartcontract/weather-dapp.py True False False 0710 05 deleteApproval ['ID1'
+neo> sc build_run weather-dapp/smartcontract/weather-dapp.py True False False 0710 05 deleteApproval ['ID1']
 
 Importing:
 neo> sc deploy weather-dapp/smartcontract/weather-dapp.avm True False False 0710 05 --fee=0.1
