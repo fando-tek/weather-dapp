@@ -292,7 +292,7 @@ def Implement(dapp_name, oracle, time_margin, min_time, max_time):
 
     Put(context, 'time_margin', time_margin)
 
-    if min_time < 4 + time_margin:
+    if min_time < 3600 + time_margin:
         Log("min_time must be greater than 3600 + time_margin")
         return False
 
